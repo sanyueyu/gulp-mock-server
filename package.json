@@ -1,0 +1,37 @@
+{
+  "name": "gulp-mock-server",
+  "version": "1.0.0",
+  "description": "to be the most simple gulp mock tool in the world",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanyueyu/gulp-mock-server.git"
+  },
+  "keywords": [
+    "gulp",
+    "mock",
+    "webserver"
+  ],
+  "author": "普修",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanyueyu/gulp-mock-server/issues"
+  },
+  "homepage": "https://github.com/sanyueyu/gulp-mock-server#readme",
+  "dependencies": {
+    "connect": "^3.0.1",
+    "connect-livereload": "^0.4.0",
+    "gulp-util": "^2.2.19",
+    "isarray": "0.0.1",
+    "node.extend": "^1.0.10",
+    "open": "^0.0.5",
+    "proxy-middleware": "^0.5.0",
+    "serve-index": "^1.1.4",
+    "serve-static": "^1.3.0",
+    "through2": "^0.5.1",
+    "tiny-lr": "0.1.4"
+  }
+}
