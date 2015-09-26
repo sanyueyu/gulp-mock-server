@@ -6,7 +6,7 @@ var connect = require('connect');
 var serveStatic = require('serve-static');
 var connectLivereload = require('connect-livereload');
 var proxy = require('proxy-middleware');
-var tinyLr = require('tiny-lr');
+var miniLr = require('mini-lr');
 var watch = require('watch');
 var fs = require('fs');
 var serveIndex = require('serve-index');
@@ -112,19 +112,19 @@ module.exports = function(options) {
 
     if (config.https) {
       if (config.https.pfx) {
-        lrServer = tinyLr({
+        lrServer = miniLr({
           pfx: fs.readFileSync(config.https.pfx),
           passphrase: config.https.passphrase
         });
       }
       else {
-        lrServer = tinyLr({
+        lrServer = miniLr({
           key: fs.readFileSync(config.https.key || __dirname + '/../ssl/dev-key.pem'),
           cert: fs.readFileSync(config.https.cert || __dirname + '/../ssl/dev-cert.pem')
         });
       }
     } else {
-      lrServer = tinyLr();
+      lrServer = miniLr();
     }
 
     lrServer.listen(config.livereload.port, config.host);
