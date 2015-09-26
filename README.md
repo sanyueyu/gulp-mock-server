@@ -1,6 +1,6 @@
 # gulp-mock-server
 to be the most simple gulp mock tool in the world
-
+<img src="http://i3.tietuku.com/f13139dfa841e17d.png" />
 ## feature
 1. don't need read url only make a directory "data" in the root and put json file in 
 2. automatic support jsonp
