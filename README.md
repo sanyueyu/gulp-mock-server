@@ -2,9 +2,9 @@
 to be the most simple gulp mock tool in the world
 
 ## feature
-> don't need read url only make a directory "data" in the root and put json file in 
-> automatic support jsonp
-> may be others
+1. don't need read url only make a directory "data" in the root and put json file in 
+2. automatic support jsonp
+3. may be others
 
 ## Install
 
@@ -39,7 +39,7 @@ put a json file such as "test.json" in the "/data" directory
 ### third
 visit url => localhost:8090/test
 
-** so easy!**
+ so easy!
 
 ## Options
 
