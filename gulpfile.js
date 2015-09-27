@@ -9,7 +9,7 @@ gulp.task('mock', function() {
         },
         directoryListing: true,
         port: 8090,
-        open: true
+        open: "http://localhost:8090/test"
     }));
 });
 
