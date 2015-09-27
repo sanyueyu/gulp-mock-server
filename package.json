@@ -24,6 +24,7 @@
   "dependencies": {
     "connect": "^3.0.1",
     "connect-livereload": "^0.4.0",
+    "gulp": "^3.9.0",
     "gulp-util": "^2.2.19",
     "isarray": "0.0.1",
     "mini-lr": "^0.1.8",
@@ -35,5 +36,8 @@
     "through2": "^0.5.1",
     "tiny-lr": "0.1.4",
     "watch": "^0.11.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
   }
 }
