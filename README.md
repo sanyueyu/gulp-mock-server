@@ -2,7 +2,7 @@
 <img src="http://i3.tietuku.com/f13139dfa841e17d.png" /><br />
 to be the most simple gulp mock tool in the world
 ## feature
-1. don't need read url only make a directory "data" in the root and put json file in 
+1. don't need write mock url, only make a directory "data" in the root and put json file in 
 2. automatic support jsonp
 3. may be others
 
@@ -18,7 +18,7 @@ $ npm install --save-dev gulp-mock-server
 make a directory "data" in the root directory
 
 ### second
-webserver config 
+webserver config: 
 
 ```js
 var gulp = require('gulp');
@@ -53,6 +53,5 @@ Key | Type | Default | Description |
 `fallback` | String | `undefined` | file to fall back to (relative to webserver root)
 `open` | Boolean/String | `false` | open the localhost server in the browser. By providing a String you can specify the path to open (for complete path, use the complete url `http://my-server:8080/public/`) .
 `https` | Boolean/Object | `false` | whether to use https or not. By default, `gulp-webserver` provides you with a development certificate but you remain free to specify a path for your key and certificate by providing an object like this one: `{key: 'path/to/key.pem', cert: 'path/to/cert.pem'}`.
-`middleware` | Function/Array | `[]` | a connect middleware function or a list of middleware functions
 `proxies` | Array | `[]`| a list of proxy objects.  Each proxy object can be specified by `{source: '/abc', target: 'http://localhost:8080/abc', options: {headers: {'ABC_HEADER': 'abc'}}}`.
 

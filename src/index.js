@@ -66,7 +66,7 @@ module.exports = function(options) {
     // For possible options, see:
     //  https://github.com/expressjs/serve-index
     directoryListing: {
-      enable: false,
+      enable: true,
       path: './',
       options: undefined
     },
