@@ -1,9 +1,14 @@
 # gulp-mock-server
 <img src="http://i3.tietuku.com/f13139dfa841e17d.png" /><br />
-to be the most simple gulp mock tool in the world
+### to be the most simple gulp mock tool in the world
+
 ## feature
 1. don't need write mock url, only make a directory "data" in the root and put json file in 
 2. automatic support jsonp
+3. support select load by reques.query/request.body such as: 
+ '/test'  => load 'data/test.json'
+ '/test?mt=1' => load 'data/test1.json'
+ mt is the abbreviation of macktag
 3. may be others
 
 ## Install
