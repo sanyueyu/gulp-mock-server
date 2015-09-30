@@ -3,6 +3,8 @@ var gutil = require('gulp-util');
 var http = require('http');
 var https = require('https');
 var connect = require('connect');
+var query = require('connect-query');
+var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
 var connectLivereload = require('connect-livereload');
 var proxy = require('proxy-middleware');
@@ -35,7 +37,7 @@ module.exports = function(options) {
     fallback: false,
     https: false,
     open: false,
-    middleware: mockMiddle,
+    middleware: [bodyParser.json(), query(), mockMiddle],
 
     /**
      *

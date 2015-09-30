@@ -14,10 +14,10 @@ $ npm install --save-dev gulp-mock-server
 
 ## Usage
 
-### first
+### first step
 make a directory "data" in the root directory
 
-### second
+### second step
 webserver config: 
 
 ```js
@@ -36,7 +36,7 @@ gulp.task('mock', function() {
 ```
 put a json file such as "test.json" in the "/data" directory
 
-### third
+### third step
 visit url => localhost:8090/test
 
  so easy!
