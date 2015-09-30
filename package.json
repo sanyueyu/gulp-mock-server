@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/sanyueyu/gulp-mock-server#readme",
   "dependencies": {
+    "body-parser": "~1.14.1",
     "connect": "^3.0.1",
     "connect-livereload": "^0.4.0",
+    "connect-query": "^0.2.0",
     "gulp": "^3.9.0",
     "gulp-util": "^2.2.19",
     "isarray": "0.0.1",

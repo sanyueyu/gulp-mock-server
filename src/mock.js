@@ -4,7 +4,10 @@ var path = require('path');
 var CWD = process.cwd();
 
 module.exports = function(req, res, next){
+  // mt is mocktag 作为标示,相同url参数不同请求的数据不同
+  var mt = req.query.mt || req.body.mt || '';
   var urlObj = url.parse(req.url, true);
+  var fullName = urlObj.pathname + mt;
   var dir = path.join(CWD, './data/');
   var fileNames = fs.readdirSync(dir)
     .filter(function(x) {return x.split('.')[1] === 'json'})
@@ -13,13 +16,13 @@ module.exports = function(req, res, next){
 
   // 查找本地是否存在这个文件
   fileNames.forEach(function(name) {
-      if (urlObj.pathname === name) {
+      if (fullName === name) {
           hasFile = true;
       }
   });
   // 拦截到请求里本地存在这个文件
   if (hasFile) {
-      var filePath = path.join(CWD, './data/' + urlObj.pathname + '.json');
+      var filePath = path.join(CWD, './data/' + fullName + '.json');
       console.log('[gulp-mock-server]', req.url + '=>' + filePath);
       // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
       delete require.cache[require.resolve(filePath)];
