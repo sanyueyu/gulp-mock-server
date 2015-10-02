@@ -1,6 +1,7 @@
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
+var rd = require('rd');
 var CWD = process.cwd();
 
 module.exports = function(req, res, next){
@@ -9,8 +10,9 @@ module.exports = function(req, res, next){
   var urlObj = url.parse(req.url, true);
   var fullName = urlObj.pathname + mt;
   var dir = path.join(CWD, './data/');
-  var fileNames = fs.readdirSync(dir)
+  var fileNames = rd.readSync(dir)
     .filter(function(x) {return x.split('.')[1] === 'json'})
+    .map(function(x) {return x.split('/data/')[1];})
     .map(function(x) {return '/' + x.split('.')[0];});
   var hasFile = false;
 
