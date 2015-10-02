@@ -7,7 +7,10 @@ gulp.task('mock', function() {
         livereload: {
             enable: false
         },
-        directoryListing: true,
+        directoryListing: {
+            enable: true,
+            path: 'data'
+        },
         port: 8090,
         open: "http://localhost:8090/test"
     }));
