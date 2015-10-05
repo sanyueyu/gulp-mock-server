@@ -5,6 +5,10 @@
 ## feature
 1. don't need to write mock url, only to make a directory named "data" in the root and put json file in 
 2. support jsonp automatically 
+3. support multi-level directory such as: 
+
+ >'/class/xiaoming'  => load 'data/class/xiaoming.json'
+
 3. support select load by request.query/request.body such as: 
  >'/test'  => load 'data/test.json'
 
