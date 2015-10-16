@@ -12,7 +12,7 @@ module.exports = function(req, res, next){
   var dir = path.join(CWD, './data/');
   var fileNames = rd.readSync(dir)
     .filter(function(x) {return x.split('.')[1] === 'json'})
-    .map(function(x) {return x.split('/data/')[1];})
+    .map(function(x) {return x.split(path.sep + 'data' + path.sep)[1];})
     .map(function(x) {return '/' + x.split('.')[0];});
   var hasFile = false;
 
