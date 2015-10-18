@@ -5,10 +5,14 @@
 ## feature
 1. don't need to write mock url, only to make a directory named "data" in the root and put json file in 
 2. support jsonp automatically 
-3. support select load by request.query/request.body such as: 
- >'/test'  => load 'data/test.json'
+3. support multi-level directory such as: 
 
- >'/test?mt=1' => load 'data/test1.json'
+ >'host + /class/xiaoming'  => response file 'data/class/xiaoming.json'
+
+3. support select load by request.query/request.body such as: 
+ >'host + /test'  => response file 'data/test.json'
+
+ >'host + /test?mt=1' => response file 'data/test1.json'
 
  'mt' is the abbreviation of 'macktag'
 3. may be others
