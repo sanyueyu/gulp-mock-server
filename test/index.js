@@ -4,6 +4,7 @@ var File = require('gulp-util').File;
 var testJSON = require('../data/test');
 var testJSON1 = require('../data/test1');
 var xiaoming = require('../data/class/xiaoming');
+var shanghai = require('../data/huang/yangguo/shanghai');
 var url = 'http://localhost:8000';
 
 describe('gulp-mock-serve', function(){
@@ -57,4 +58,15 @@ describe('gulp-mock-serve', function(){
           done(err);
         });
   });
+
+  it('mock /huang/yangguo/shanghai =>  huang/yangguo/shanghai.json', function (done) {
+        stream = webserver();
+        request(url)
+            .get('/huang/yangguo/shanghai')
+            .expect(200, shanghai)
+            .end(function (err) {
+              if (err) return done(err);
+              done(err);
+        });
+    });
 });
