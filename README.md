@@ -68,5 +68,4 @@ Key | Type | Default | Description |
 
 ## contributors
 
-sanyueyu,dstj,elwayman02
-thx
+[sanyueyu](https://github.com/sanyueyu),[dstj](https://github.com/dstj),[elwayman02](https://github.com/elwayman02)
