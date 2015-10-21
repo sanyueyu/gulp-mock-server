@@ -18,7 +18,8 @@ module.exports = function(req, res, next){
 
   // 查找本地是否存在这个文件
   fileNames.forEach(function(name) {
-      if (fullName === name.replace(path.sep, '/')) {
+      name = name.replace(new RegExp('\\' + path.sep, 'g'), '/');
+      if (fullName === name) {
           hasFile = true;
       }
   });
