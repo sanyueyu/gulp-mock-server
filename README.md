@@ -4,17 +4,48 @@
 
 ## feature
 1. don't need to write mock url, only to make a directory named "data" in the root and put json file in 
+ >'host + /test'  => response file 'data/test.json'
+
+ >'host + /test.do'  => response file 'data/test.do.json'
+
 2. support jsonp automatically 
+3. support https
 3. support multi-level directory such as: 
 
  >'host + /class/xiaoming'  => response file 'data/class/xiaoming.json'
 
-3. support select load by request.query/request.body such as: 
+3. support select simple load by request.query/request.body such as: 
  >'host + /test'  => response file 'data/test.json'
 
  >'host + /test?mt=1' => response file 'data/test1.json'
 
  'mt' is the abbreviation of 'macktag'
+
+3. support select complex load by request.query/request.body such as: 
+
+/data/check.do.js content:
+
+```javascript
+module.exports = [{
+  params: {id: 123},
+  response: './check_one.json'
+}, {
+  params: {id: 456},
+  response: './check_two.json'
+}, {
+  params: {id: 789},
+  response: {
+    name: "three"
+  }
+}]
+```
+
+ >'host + /check.do'  => response file 'data/check.do.js'
+
+ >'host + /check.do?id=123'  => response file 'data/check_one.json'
+
+ >'host + /check.do?id=789'  => response content '{"name":"three"}'
+
 3. may be others
 
 ## Install

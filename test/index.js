@@ -2,6 +2,7 @@ var request = require('supertest');
 var webserver = require('../src');
 var File = require('gulp-util').File;
 var testJSON = require('../data/test');
+var testDoJSON = require('../data/test.do.json');
 var testJSON1 = require('../data/test1');
 var xiaoming = require('../data/class/xiaoming');
 var shanghai = require('../data/huang/yangguo/shanghai');
@@ -42,6 +43,17 @@ describe('gulp-mock-serve', function(){
         .post('/test')
         .send({'mt': '1'})
         .expect(200, testJSON1)
+        .end(function(err) {
+          if (err) return done(err);
+          done(err);
+        });
+  });
+
+  it('mock post /test.do =>  test.do.json', function(done) {
+      stream = webserver();
+      request(url)
+        .post('/test.do')
+        .expect(200, testDoJSON)
         .end(function(err) {
           if (err) return done(err);
           done(err);

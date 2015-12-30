@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var rd = require('rd');
 var CWD = process.cwd();
-var checkMark = /\.json/;
+var checkMark = /\.json|\.js/;
 
 module.exports = function(req, res, next){
   // mt is mocktag 作为标示,相同url参数不同请求的数据不同
@@ -14,30 +14,63 @@ module.exports = function(req, res, next){
   var fileNames = rd.readSync(dir)
     .filter(function(x) {return checkMark.test(x);})
     .map(function(x) {return x.split(path.sep + 'data' + path.sep)[1];})
-    .map(function(x) {return '/' + x.replace(checkMark, '');});
+    .map(function(x) {
+      return {
+        name: '/' + x.replace(checkMark, ''),
+        verb: x.match(checkMark)[0]
+      };
+      //return '/' + x.replace(checkMark, '');
+    });
   var hasFile = false;
+  var verb = 'json'; // 文件后缀
 
   // 查找本地是否存在这个文件
   fileNames.forEach(function(name) {
-      name = name.replace(new RegExp('\\' + path.sep, 'g'), '/');
-      if (fullName === name) {
+      var _name = name.name.replace(new RegExp('\\' + path.sep, 'g'), '/');
+      if (fullName === _name) {
           hasFile = true;
+          verb = name.verb;
       }
   });
 
   // 拦截到请求里本地存在这个文件
   if (hasFile) {
-      var filePath = path.join(CWD, './data/' + fullName + '.json');
+      var inlineData; // 写在check条件里的数据
+      var filePath = path.join(CWD, './data/' + fullName + verb);
+
+      if (verb === '.js') {
+        delete require.cache[require.resolve(filePath)];
+        var checks = require(filePath);
+        checks.forEach(function(item) {
+          var isCheck = true;
+          for (var k in item.params) {
+            if (item.params[k] != req.query[k]&&item.params[k] != req.body[k]) {
+              isCheck = false;
+            }
+          }
+          if (isCheck) {
+            if (typeof(item.response) === 'string') {
+              filePath = path.join(CWD, '/data/' + fullName.replace(/\/.+$/, '') + item.response);
+            } else {
+              inlineData = item.response;
+            }
+            return;
+          }
+        });
+      }
+
+      // 如果是JS文件则根据参数请求文件
       console.log('[gulp-mock-server]', req.url + '=>' + filePath);
+
       // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
       delete require.cache[require.resolve(filePath)];
       res.setHeader("Access-Control-Allow-Origin", "*");
       if (urlObj.query&&urlObj.query.callback) {
           res.setHeader('Content-type', 'application/javascript');
-          res.end(urlObj.query.callback + '(' + JSON.stringify(require(filePath)) + ')');
+          res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
       } else {
           res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify(require(filePath)));
+          res.end(JSON.stringify(inlineData || require(filePath)));
       }
       return;
   }
