@@ -1,0 +1,24 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/node',
+1 verbose cli   '/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/npm',
+1 verbose cli   'publish',
+1 verbose cli   '--tag',
+1 verbose cli   '1.0.9' ]
+2 info using npm@3.3.12
+3 info using node@v5.1.1
+4 verbose publish [ '.' ]
+5 verbose stack Error: Tag name must not be a valid SemVer range: 1.0.9
+5 verbose stack     at EventEmitter.publish (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/lib/publish.js:40:14)
+5 verbose stack     at Object.commandCache.(anonymous function) (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/lib/npm.js:214:13)
+5 verbose stack     at EventEmitter.<anonymous> (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/bin/npm-cli.js:75:30)
+5 verbose stack     at doNTCallback0 (node.js:430:9)
+5 verbose stack     at process._tickCallback (node.js:359:13)
+6 verbose cwd /Users/puxiu/workspace/gulp-mock-server
+7 error Darwin 14.0.0
+8 error argv "/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/node" "/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/npm" "publish" "--tag" "1.0.9"
+9 error node v5.1.1
+10 error npm  v3.3.12
+11 error Tag name must not be a valid SemVer range: 1.0.9
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]
