@@ -10,6 +10,9 @@
 
 #### support set mock directory default is './data'
 #### support jsonp automatically 
+
+ >'host + /test.jsonp?callback=cb'  => response file 'data/test.jsonp.json'
+
 #### support https
 #### support multi-level directory such as: 
 
