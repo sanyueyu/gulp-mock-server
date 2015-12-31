@@ -3,26 +3,26 @@
 ### to be the most simple gulp mock tool in the world
 
 ## feature
-1. don't need to write mock url, only to make a directory named "data" in the root and put json file in 
+### don't need to write mock url, only to make a directory named "data" in the root and put json file in 
  >'host + /test'  => response file 'data/test.json'
 
  >'host + /test.do'  => response file 'data/test.do.json'
 
-2. support set mock directory default is './data'
-2. support jsonp automatically 
-3. support https
-3. support multi-level directory such as: 
+### support set mock directory default is './data'
+### support jsonp automatically 
+### support https
+### support multi-level directory such as: 
 
  >'host + /class/xiaoming'  => response file 'data/class/xiaoming.json'
 
-3. support select simple load by request.query/request.body such as: 
+### support select simple load by request.query/request.body such as: 
  >'host + /test'  => response file 'data/test.json'
 
  >'host + /test?mt=1' => response file 'data/test1.json'
 
  'mt' is the abbreviation of 'macktag'
 
-3. support select complex load by request.query/request.body such as: 
+### support select complex load by request.query/request.body such as: 
 
 /data/check.do.js content:
 
@@ -47,7 +47,7 @@ module.exports = [{
 
  >'host + /check.do?id=789'  => response content '{"name":"three"}'
 
-3. may be others
+### may be others
 
 ## Install
 
