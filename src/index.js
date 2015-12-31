@@ -37,7 +37,9 @@ module.exports = function(options) {
     fallback: false,
     https: false,
     open: false,
-    middleware: [bodyParser.json(), query(), mockMiddle],
+    mockDir: './data',
+    //middleware: [bodyParser.json(), query(), mockMiddle(mockDir)],
+    middleware: [bodyParser.json(), query()],
 
     /**
      *
@@ -143,6 +145,9 @@ module.exports = function(options) {
         app.use(m);
       });
   }
+
+  // mock middleware
+  app.use(mockMiddle(config.mockDir));
 
   // Proxy requests
   for (var i = 0, len = config.proxies.length; i < len; i++) {
