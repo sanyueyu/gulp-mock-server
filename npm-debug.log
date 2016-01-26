@@ -1,0 +1,115 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/node',
+1 verbose cli   '/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.3.12
+3 info using node@v5.1.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/puxiu/workspace/gulp-mock-server',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/puxiu/.npm/gulp-mock-server/1.0.11/package.tgz not in flight; packing
+9 info lifecycle gulp-mock-server@1.0.11~prepublish: gulp-mock-server@1.0.11
+10 silly lifecycle gulp-mock-server@1.0.11~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ '/Users/puxiu/.npm/gulp-mock-server/1.0.11/package.tgz',
+11 verbose tar pack   '/Users/puxiu/workspace/gulp-mock-server' ]
+12 verbose tarball /Users/puxiu/.npm/gulp-mock-server/1.0.11/package.tgz
+13 verbose folder /Users/puxiu/workspace/gulp-mock-server
+14 verbose addLocalTarball adding from inside cache /Users/puxiu/.npm/gulp-mock-server/1.0.11/package.tgz
+15 silly cache afterAdd gulp-mock-server@1.0.11
+16 verbose afterAdd /Users/puxiu/.npm/gulp-mock-server/1.0.11/package/package.json not in flight; writing
+17 verbose afterAdd /Users/puxiu/.npm/gulp-mock-server/1.0.11/package/package.json written
+18 silly publish { name: 'gulp-mock-server',
+18 silly publish   version: '1.0.11',
+18 silly publish   description: 'to be the most simple gulp mock tool in the world',
+18 silly publish   main: 'src/index.js',
+18 silly publish   scripts: { test: 'mocha' },
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/sanyueyu/gulp-mock-server.git' },
+18 silly publish   keywords: [ 'gulp', 'mock', 'webserver' ],
+18 silly publish   author: { name: '普修' },
+18 silly publish   license: 'ISC',
+18 silly publish   bugs: { url: 'https://github.com/sanyueyu/gulp-mock-server/issues' },
+18 silly publish   homepage: 'https://github.com/sanyueyu/gulp-mock-server#readme',
+18 silly publish   dependencies:
+18 silly publish    { 'body-parser': '~1.14.1',
+18 silly publish      connect: '^3.0.1',
+18 silly publish      'connect-livereload': '^0.4.0',
+18 silly publish      'connect-query': '^0.2.0',
+18 silly publish      gulp: '^3.9.0',
+18 silly publish      'gulp-util': '^2.2.19',
+18 silly publish      isarray: '0.0.1',
+18 silly publish      'mini-lr': '^0.1.8',
+18 silly publish      'node.extend': '^1.0.10',
+18 silly publish      open: '^0.0.5',
+18 silly publish      'proxy-middleware': '^0.5.0',
+18 silly publish      rd: '0.0.2',
+18 silly publish      'serve-index': '^1.1.4',
+18 silly publish      'serve-static': '^1.3.0',
+18 silly publish      through2: '^0.5.1',
+18 silly publish      'tiny-lr': '0.1.4',
+18 silly publish      watch: '^0.11.0' },
+18 silly publish   devDependencies: { gulp: '^3.9.0', mocha: '~2.3.3', supertest: '~1.1.0' },
+18 silly publish   readme: '# gulp-mock-server\n<img src="http://i3.tietuku.com/f13139dfa841e17d.png" /><br />\n### to be the most simple gulp mock tool in the world\n\n## feature\n#### don\'t need to write mock url, only to make a directory named "data" in the root and put json file in \n >\'host + /test\'  => response file \'data/test.json\'\n\n >\'host + /test.do\'  => response file \'data/test.do.json\'\n\n#### support set mock directory default is \'./data\'\n#### support jsonp automatically \n\n >\'host + /test.jsonp?callback=cb\'  => response file \'data/test.jsonp.json\'\n\n#### support https\n#### support multi-level directory such as: \n\n >\'host + /class/xiaoming\'  => response file \'data/class/xiaoming.json\'\n\n#### support select simple load by request.query/request.body such as: \n >\'host + /test\'  => response file \'data/test.json\'\n\n >\'host + /test?mt=1\' => response file \'data/test1.json\'\n\n \'mt\' is the abbreviation of \'macktag\'\n\n#### support select complex load by request.query/request.body such as: \n\n/data/check.do.js content:\n\n```javascript\nmodule.exports = [{\n  params: {id: 123},\n  response: \'./check_one.json\'\n}, {\n  params: {id: 456},\n  response: \'./check_two.json\'\n}, {\n  params: {id: 789},\n  response: {\n    name: "three"\n  }\n}]\n```\n\n >\'host + /check.do\'  => response file \'data/check.do.js\'\n\n >\'host + /check.do?id=123\'  => response file \'data/check_one.json\'\n\n >\'host + /check.do?id=789\'  => response content \'{"name":"three"}\'\n\n#### may be others...\n\n## Install\n\n```sh\n$ npm install --save-dev gulp-mock-server\n```\n\n## Usage\n\n### first step\nmake a directory named "data" in the root directory\n\n### second step\nwebserver config: \n\n```js\nvar gulp = require(\'gulp\');\nvar mockServer = require(\'gulp-mock-server\');\n\ngulp.task(\'mock\', function() {\n  gulp.src(\'.\')\n    .pipe(webserver({\n      port: 8090\n    }));\n});\n```\nput a json file such as "test.json" in the "/data" directory\n\n### third step\nvisit url => localhost:8090/test\n\n so easy!\n\n## Options\n\nKey | Type | Default | Description |\n--- | --- | --- | --- |\n`host` | String | `localhost` | hostname of the webserver\n`port` | Number | `8000` | port of the webserver\n`path` | String | `/` | path to the webserver\n`mockDir` | String | `./data` | mock directory\n`livereload` | Boolean/Object | `false` | whether to use livereload. For advanced options, provide an object. You can use the \'port\' property to set a custom live reload port and the `filter` function to filter out files to watch. The object also needs to set `enable` property to true (e.g. `enable: true`) in order to activate the livereload mode. It is off by default.\n`directoryListing` | Boolean/Object | `false` | whether to display a directory listing. For advanced options, provide an object with the \'enable\' property set to true. You can use the \'path\' property to set a custom path or the \'options\' property to set custom [serve-index](https://github.com/expressjs/serve-index) options.\n`fallback` | String | `undefined` | file to fall back to (relative to webserver root)\n`open` | Boolean/String | `false` | open the localhost server in the browser. By providing a String you can specify the path to open (for complete path, use the complete url `http://my-server:8080/public/`) .\n`https` | Boolean/Object | `false` | whether to use https or not. By default, `gulp-webserver` provides you with a development certificate but you remain free to specify a path for your key and certificate by providing an object like this one: `{key: \'path/to/key.pem\', cert: \'path/to/cert.pem\'}`.\n`proxies` | Array | `[]`| a list of proxy objects.  Each proxy object can be specified by `{source: \'/abc\', target: \'http://localhost:8080/abc\', options: {headers: {\'ABC_HEADER\': \'abc\'}}}`.\n\n## contributors\n\n[sanyueyu](https://github.com/sanyueyu),[dstj](https://github.com/dstj),[elwayman02](https://github.com/elwayman02)\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: 'ae1cc097dc8d27f6257fb10c11ce3346315e0427',
+18 silly publish   _id: 'gulp-mock-server@1.0.11',
+18 silly publish   _shasum: 'e8ed4a10d20913bcd19ca09680eaee87670a7c57',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name gulp-mock-server
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/gulp-mock-server
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading /Users/puxiu/.npm/gulp-mock-server/1.0.11/package.tgz
+26 verbose request uri https://registry.npmjs.org/gulp-mock-server
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 17:38:04
+29 verbose request using bearer token for auth
+30 verbose request id 14353b85c70f5704
+31 http request PUT https://registry.npmjs.org/gulp-mock-server
+32 http 403 https://registry.npmjs.org/gulp-mock-server
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=300',
+33 verbose headers   'content-length': '96',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Tue, 26 Jan 2016 09:38:05 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-nrt6120-NRT',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1453801085.057430,VS0,VE569' }
+34 verbose request invalidating /Users/puxiu/.npm/registry.npmjs.org/gulp-mock-server on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: "You cannot publish over the previously published version 1.0.11." : gulp-mock-server
+36 verbose stack     at makeError (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+36 verbose stack     at Request._callback (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+36 verbose stack     at Request.self.callback (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/request/request.js:198:22)
+36 verbose stack     at emitTwo (events.js:87:13)
+36 verbose stack     at Request.emit (events.js:172:7)
+36 verbose stack     at Request.<anonymous> (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/request/request.js:1082:10)
+36 verbose stack     at emitOne (events.js:82:20)
+36 verbose stack     at Request.emit (events.js:169:7)
+36 verbose stack     at IncomingMessage.<anonymous> (/Users/puxiu/Project/nvm/versions/node/v5.1.1/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+37 verbose statusCode 403
+38 verbose pkgid gulp-mock-server
+39 verbose cwd /Users/puxiu/workspace/gulp-mock-server
+40 error Darwin 14.0.0
+41 error argv "/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/node" "/Users/puxiu/Project/nvm/versions/node/v5.1.1/bin/npm" "publish"
+42 error node v5.1.1
+43 error npm  v3.3.12
+44 error code E403
+45 error "You cannot publish over the previously published version 1.0.11." : gulp-mock-server
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]
