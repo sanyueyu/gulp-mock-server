@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CWD	src/mock.js	/^var CWD = process.cwd();$/;"	v
+app	src/index.js	/^  var app = connect();$/;"	v
+bodyParser	src/index.js	/^var bodyParser = require('body-parser');$/;"	v
+checkMark	src/mock.js	/^var checkMark = \/\\.json|\\.js\/;$/;"	v
+config	src/index.js	/^  var config = enableMiddlewareShorthand(defaults, options, [$/;"	v
+connect	src/index.js	/^var connect = require('connect');$/;"	v
+connectLivereload	src/index.js	/^var connectLivereload = require('connect-livereload');$/;"	v
+enableMiddlewareShorthand	src/index.js	/^var enableMiddlewareShorthand = require('.\/enableMiddlewareShorthand');$/;"	v
+extend	src/enableMiddlewareShorthand/index.js	/^var extend = require('node.extend');$/;"	v
+extend	src/index.js	/^var extend = require('node.extend');$/;"	v
+files	src/index.js	/^  var files = [];$/;"	v
+fs	src/index.js	/^var fs = require('fs');$/;"	v
+fs	src/mock.js	/^var fs = require('fs');$/;"	v
+gutil	src/index.js	/^var gutil = require('gulp-util');$/;"	v
+http	src/index.js	/^var http = require('http');$/;"	v
+https	src/index.js	/^var https = require('https');$/;"	v
+isarray	src/index.js	/^var isarray = require('isarray');$/;"	v
+lrServer	src/index.js	/^  var lrServer;$/;"	v
+miniLr	src/index.js	/^var miniLr = require('mini-lr');$/;"	v
+mockMiddle	src/index.js	/^var mockMiddle = require('.\/mock');$/;"	v
+module.exports	src/enableMiddlewareShorthand/index.js	/^module.exports = function(defaults, options, props)$/;"	f
+module.exports	src/index.js	/^module.exports = function(options) {$/;"	f
+module.exports.defaults.fallback	src/index.js	/^    fallback: false,$/;"	p
+module.exports.defaults.host	src/index.js	/^    host: 'localhost',$/;"	p
+module.exports.defaults.https	src/index.js	/^    https: false,$/;"	p
+module.exports.defaults.middleware	src/index.js	/^    middleware: [bodyParser.json(), query()],$/;"	p
+module.exports.defaults.mockDir	src/index.js	/^    mockDir: '.\/data',$/;"	p
+module.exports.defaults.open	src/index.js	/^    open: false,$/;"	p
+module.exports.defaults.path	src/index.js	/^    path: '\/',$/;"	p
+module.exports.defaults.port	src/index.js	/^    port: 8000,$/;"	p
+open	src/index.js	/^var open = require('open');$/;"	v
+openInBrowser	src/index.js	/^  var openInBrowser = function() {$/;"	f
+opts.key	src/index.js	/^        key: fs.readFileSync(config.https.key || __dirname + '\/..\/ssl\/dev-key.pem'),$/;"	p
+opts.pfx	src/index.js	/^        pfx: fs.readFileSync(config.https.pfx),$/;"	p
+path	src/index.js	/^var path = require('path');$/;"	v
+path	src/mock.js	/^var path = require('path');$/;"	v
+proxy	src/index.js	/^var proxy = require('proxy-middleware');$/;"	v
+query	src/index.js	/^var query = require('connect-query');$/;"	v
+rd	src/mock.js	/^var rd = require('rd');$/;"	v
+serveIndex	src/index.js	/^var serveIndex = require('serve-index');$/;"	v
+serveStatic	src/index.js	/^var serveStatic = require('serve-static');$/;"	v
+stream	src/index.js	/^  var stream = through.obj(function(file, enc, callback) {$/;"	v
+through	src/index.js	/^var through = require('through2');$/;"	v
+url	src/index.js	/^var url = require('url');$/;"	v
+url	src/mock.js	/^var url = require('url');$/;"	v
+watch	src/index.js	/^var watch = require('watch');$/;"	v
+webserver	src/index.js	/^  var webserver;$/;"	v
