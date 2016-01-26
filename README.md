@@ -72,7 +72,7 @@ var mockServer = require('gulp-mock-server');
 
 gulp.task('mock', function() {
   gulp.src('.')
-    .pipe(webserver({
+    .pipe(mockServer({
       port: 8090
     }));
 });
