@@ -30,6 +30,13 @@
 /data/check.do.js content:
 
 ```javascript
+module.exports = {
+  params: {id: 123},
+  response: './check_one.json'
+}
+
+or 
+
 module.exports = [{
   params: {id: 123},
   response: './check_one.json'
@@ -49,6 +56,15 @@ module.exports = [{
  >'host + /check.do?id=123'  => response file 'data/check_one.json'
 
  >'host + /check.do?id=789'  => response content '{"name":"three"}'
+
+configs:
+
+Key | Type | Default | Description |
+--- | --- | --- | --- |
+`params` | Object | Null | The parameters of the meet
+`delay` | Number | 0 | Request delay time (Temporary does not support)
+`code` | Number  | 200 | Status code (Temporary does not support)
+`response` | Object | {} | The data returned
 
 #### may be others...
 

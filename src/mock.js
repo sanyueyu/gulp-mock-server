@@ -1,4 +1,5 @@
 var url = require('url');
+var util = require('util');
 var fs = require('fs');
 var path = require('path');
 var rd = require('rd');
@@ -43,13 +44,20 @@ module.exports = function(mockDir) {
         if (verb === '.js') {
           delete require.cache[require.resolve(filePath)];
           var checks = require(filePath);
+          if (util.isObject(checks) && !util.isArray(checks)) {
+            checks = [checks];
+          }
           checks.forEach(function(item) {
             var isCheck = true;
+            // 检查params参数
             for (var k in item.params) {
               if (item.params[k] != req.query[k]&&item.params[k] != req.body[k]) {
                 isCheck = false;
               }
             }
+            if (item.delay) {
+            }
+            // 检查请求method
             if (isCheck) {
               if (typeof(item.response) === 'string') {
                 //filePath = path.join(dir + fullName.replace(/^\.|\/.+$/, '') + item.response);
