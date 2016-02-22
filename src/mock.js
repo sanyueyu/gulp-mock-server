@@ -84,6 +84,8 @@ module.exports = function(mockDir) {
             res.end(JSON.stringify(inlineData || require(filePath)));
         }
         return;
+    } else {
+        console.log('In your directory without this file:' + path.join(dir + fullName + '[.json|.js]'));
     }
 
     next();

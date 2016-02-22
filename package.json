@@ -4,6 +4,7 @@
   "description": "to be the most simple gulp mock tool in the world",
   "main": "src/index.js",
   "scripts": {
+    "start": "gulp",
     "test": "mocha"
   },
   "repository": {
