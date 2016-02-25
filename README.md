@@ -34,9 +34,10 @@ module.exports = {
   params: {id: 123},
   response: './check_one.json'
 }
+```
+or
 
-or 
-
+```javascript
 module.exports = [{
   params: {id: 123},
   response: './check_one.json'
