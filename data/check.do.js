@@ -9,4 +9,8 @@ module.exports = [{
   response: {
     name: "three"
   }
+}, {
+  response: {
+    name: "four"
+  }
 }];

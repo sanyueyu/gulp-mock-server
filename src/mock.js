@@ -3,6 +3,7 @@ var util = require('util');
 var fs = require('fs');
 var path = require('path');
 var rd = require('rd');
+var colors = require('colors');
 var CWD = process.cwd();
 var checkMark = /\.json|\.js/;
 
@@ -47,7 +48,7 @@ module.exports = function(mockDir) {
           if (util.isObject(checks) && !util.isArray(checks)) {
             checks = [checks];
           }
-          checks.forEach(function(item) {
+          checks.every(function(item) {
             var isCheck = true;
             // 检查params参数
             for (var k in item.params) {
@@ -55,9 +56,6 @@ module.exports = function(mockDir) {
                 isCheck = false;
               }
             }
-            if (item.delay) {
-            }
-            // 检查请求method
             if (isCheck) {
               if (typeof(item.response) === 'string') {
                 //filePath = path.join(dir + fullName.replace(/^\.|\/.+$/, '') + item.response);
@@ -65,8 +63,9 @@ module.exports = function(mockDir) {
               } else {
                 inlineData = item.response;
               }
-              return;
+              return false;
             }
+            return true;
           });
         }
 
@@ -85,7 +84,7 @@ module.exports = function(mockDir) {
         }
         return;
     } else {
-        console.log('In your directory without this file:' + path.join(dir + fullName + '[.json|.js]'));
+        console.log('No file:'.red + path.join(dir + fullName + '[.json|.js]').red);
     }
 
     next();
