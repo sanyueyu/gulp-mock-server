@@ -14,6 +14,8 @@ module.exports = function(mockDir) {
     var urlObj = url.parse(req.url, true);
     var fullName = urlObj.pathname + mt;
     //var dir = path.join(CWD, './data/');
+    console.log('=====');
+    console.log(mockDir);
     var dir = path.join(CWD, mockDir);
     var fileNames = rd.readSync(dir)
       .filter(function(x) {return checkMark.test(x);})
