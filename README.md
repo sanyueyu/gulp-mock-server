@@ -58,6 +58,12 @@ module.exports = [{
 
  >'host + /check.do?id=789'  => response content '{"name":"three"}'
 
+#### support commandLine
+recommand npm package scripts:
+"scripts" {
+    "mock": "mock -e -p 9999"
+}
+
 configs:
 
 Key | Type | Default | Description |
