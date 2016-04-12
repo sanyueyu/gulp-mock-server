@@ -9,6 +9,9 @@ var checkMark = /\.json|\.js/;
 
 module.exports = function(mockDir) {
   return function(req, res, next){
+    console.log('=====');
+    console.log(req.body);
+    console.log('=====');
     // mt is mocktag 作为标示,相同url参数不同请求的数据不同
     var mt = req.query.mt || req.body.mt || '';
     var urlObj = url.parse(req.url, true);
@@ -40,6 +43,7 @@ module.exports = function(mockDir) {
     // 拦截到请求里本地存在这个文件
     if (hasFile) {
         var inlineData; // 写在check条件里的数据
+        var delay = 0;
         var filePath = path.join(dir + fullName + verb);
 
         if (verb === '.js') {
@@ -57,6 +61,9 @@ module.exports = function(mockDir) {
               }
             }
             if (isCheck) {
+              if (item.delay) {
+                delay = item.delay;
+              }
               if (typeof(item.response) === 'string') {
                 //filePath = path.join(dir + fullName.replace(/^\.|\/.+$/, '') + item.response);
                 filePath = path.join(dir + item.response.replace(/^\./, ''));
@@ -77,10 +84,14 @@ module.exports = function(mockDir) {
         res.setHeader("Access-Control-Allow-Origin", "*");
         if (urlObj.query&&urlObj.query.callback) {
             res.setHeader('Content-type', 'application/javascript');
-            res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
+            setTimeout(function() {
+                res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
+            }, delay);
         } else {
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(inlineData || require(filePath)));
+            setTimeout(function() {
+                res.end(JSON.stringify(inlineData || require(filePath)));
+            }, delay);
         }
         return;
     } else {

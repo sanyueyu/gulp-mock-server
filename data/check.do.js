@@ -1,5 +1,6 @@
 module.exports = [{
   params: {id: 123},
+  delay: 1000,
   response: './check_one.json'
 }, {
   params: {id: 456},

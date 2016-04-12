@@ -5,6 +5,7 @@ var https = require('https');
 var connect = require('connect');
 var query = require('connect-query');
 var bodyParser = require('body-parser');
+var multipart = require('connect-multiparty');
 var serveStatic = require('serve-static');
 var connectLivereload = require('connect-livereload');
 var proxy = require('proxy-middleware');
@@ -39,7 +40,8 @@ module.exports = function(options) {
     open: false,
     mockDir: './data',
     //middleware: [bodyParser.json(), query(), mockMiddle(mockDir)],
-    middleware: [bodyParser.json(), query()],
+    middleware: [bodyParser.urlencoded({ extended: false }), bodyParser.json(), query()],
+    //middleware: [multipart(), query()],
 
     /**
      *

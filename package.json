@@ -31,6 +31,7 @@
     "commander": "~2.9.0",
     "connect": "^3.0.1",
     "connect-livereload": "^0.4.0",
+    "connect-multiparty": "^2.0.0",
     "connect-query": "^0.2.0",
     "gulp": "^3.9.0",
     "gulp-util": "^2.2.19",
