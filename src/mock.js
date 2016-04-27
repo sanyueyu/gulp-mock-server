@@ -83,12 +83,12 @@ module.exports = function(mockDir) {
         delete require.cache[require.resolve(filePath)];
         res.setHeader("Access-Control-Allow-Origin", "*");
         if (urlObj.query&&urlObj.query.callback) {
-            res.setHeader('Content-type', 'application/javascript');
+            res.setHeader('Content-type', 'application/javascript;charset=utf-8');
             setTimeout(function() {
                 res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
             }, delay);
         } else {
-            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Content-Type', 'application/json;charset=utf-8');
             setTimeout(function() {
                 res.end(JSON.stringify(inlineData || require(filePath)));
             }, delay);
