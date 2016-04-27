@@ -124,4 +124,5 @@ Key | Type | Default | Description |
 
 ## contributors
 
-[sanyueyu](https://github.com/sanyueyu),[dstj](https://github.com/dstj),[elwayman02](https://github.com/elwayman02)
+[sanyueyu](https://github.com/sanyueyu),[dstj](https://github.com/dstj),[elwayman02](https://github.com/elwayman02),
+[walkcc](https://github.com/walkcc)
