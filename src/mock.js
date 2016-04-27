@@ -9,9 +9,6 @@ var checkMark = /\.json|\.js/;
 
 module.exports = function(mockDir) {
   return function(req, res, next){
-    console.log('=====');
-    console.log(req.body);
-    console.log('=====');
     // mt is mocktag 作为标示,相同url参数不同请求的数据不同
     var mt = req.query.mt || req.body.mt || '';
     var urlObj = url.parse(req.url, true);
