@@ -21,6 +21,7 @@ module.exports = {
       var name = arr.pop(dir, arr.slice(3).join('/'));
       fse.ensureDirSync(path.join(dir, arr.slice(3).join('/')));
       request(url).pipe(fs.createWriteStream(path.join(dir, arr.slice(3).join('/'), name + '.json')));
+      console.log('success! file path:' + path.join(dir, arr.slice(3).join('/'), name + '.json'));
     }
     if (argv.server || argv.e) {
       var mockDir = argv.server || argv.e;
