@@ -58,12 +58,6 @@ module.exports = [{
 
  >'host + /check.do?id=789'  => response content '{"name":"three"}'
 
-#### support commandLine
-recommand npm package scripts:
-"scripts" {
-    "mock": "mock -e -p 9999"
-}
-
 configs:
 
 Key | Type | Default | Description |
@@ -73,12 +67,25 @@ Key | Type | Default | Description |
 `code` | Number  | 200 | Status code (Temporary does not support)
 `response` | Object | {} | The data returned
 
+#### support powerful command line
+Options:
+- -h, --help               output usage information
+- -v, --version            output the version number
+- -e, --server [mockRoot]  start mock server, such as: mock -e
+- -p, --port [port]        server port config, such as: mock -e -p 8000
+- -f, --fetch [url]        download remote url to local json file, such as: mock -f http://hostname/api/test.do
+
 #### may be others...
 
 ## Install
 
+localInstall(use for gulp):
 ```sh
 $ npm install --save-dev gulp-mock-server
+```
+globalInstall(use for commandline):
+```sh
+$ npm install -g gulp-mock-server
 ```
 
 ## Usage
