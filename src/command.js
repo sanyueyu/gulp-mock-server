@@ -18,7 +18,7 @@ module.exports = {
 
       var arr = url.split('/');
       // 去除 "http:", "", "hostname",
-      var name = arr.pop(dir, arr.slice(3).join('/'));
+      var name = arr.pop(dir, arr.slice(3).join('/')).split('?')[0];
       fse.ensureDirSync(path.join(dir, arr.slice(3).join('/')));
       request(url).pipe(fs.createWriteStream(path.join(dir, arr.slice(3).join('/'), name + '.json')));
       console.log('success! file path:' + path.join(dir, arr.slice(3).join('/'), name + '.json'));
