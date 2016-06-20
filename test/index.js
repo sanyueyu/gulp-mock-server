@@ -47,6 +47,7 @@ describe('gulp-mock-serve', function(){
       setTimeout(function() {
         request(url)
           .post('/test')
+          .set('Content-Type', 'application/x-www-form-urlencoded')
           .send({'mt': '1'})
           .expect(200, testJSON1)
           .end(function(err) {
@@ -108,4 +109,6 @@ describe('gulp-mock-serve', function(){
         });
       }, 300);
   });
+
+
 });
