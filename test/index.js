@@ -18,73 +18,87 @@ describe('gulp-mock-serve', function(){
 
   it('mock /test =>  test.json', function(done) {
       stream = webserver();
-      request(url)
-        .get('/test')
-        .expect(200, testJSON)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .get('/test')
+          .expect(200, testJSON)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
   });
 
   it('mock /test?mt=1 =>  test1.json', function(done) {
       stream = webserver();
-      request(url)
-        .get('/test?mt=1')
-        .expect(200, testJSON1)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .get('/test?mt=1')
+          .expect(200, testJSON1)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
   });
 
   it('mock post /test =>  test1.json and mt=1', function(done) {
       stream = webserver();
-      request(url)
-        .post('/test')
-        .send({'mt': '1'})
-        .expect(200, testJSON1)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .post('/test')
+          .send({'mt': '1'})
+          .expect(200, testJSON1)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
   });
 
   it('mock get /check.do?id=123 =>  check_one.json', function(done) {
       stream = webserver();
-      request(url)
-        .post('/check.do')
-        .send({'id': '123'})
-        .expect(200, checkOne)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .post('/check.do')
+          .send({'id': '123'})
+          .expect(200, checkOne)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
   });
   it('mock post /test.do =>  test.do.json', function(done) {
       stream = webserver();
-      request(url)
-        .post('/test.do')
-        .expect(200, testDoJSON)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .post('/test.do')
+          .expect(200, testDoJSON)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
+
   });
 
   it('mock /class/xiaoming =>  class/xiaoming.json', function(done) {
       stream = webserver();
-      request(url)
-        .get('/class/xiaoming')
-        .expect(200, xiaoming)
-        .end(function(err) {
-          if (err) return done(err);
-          done(err);
-        });
+      setTimeout(function() {
+        request(url)
+          .get('/class/xiaoming')
+          .expect(200, xiaoming)
+          .end(function(err) {
+            if (err) return done(err);
+            done(err);
+          });
+      }, 300);
   });
 
   it('mock /huang/yangguo/shanghai =>  huang/yangguo/shanghai.json', function (done) {
-        stream = webserver();
+      stream = webserver();
+      setTimeout(function() {
         request(url)
             .get('/huang/yangguo/shanghai')
             .expect(200, shanghai)
@@ -92,5 +106,6 @@ describe('gulp-mock-serve', function(){
               if (err) return done(err);
               done(err);
         });
-    });
+      }, 300);
+  });
 });
