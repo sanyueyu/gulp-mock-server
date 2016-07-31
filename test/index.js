@@ -7,6 +7,7 @@ var testJSON1 = require('../data/test1');
 var xiaoming = require('../data/class/xiaoming');
 var shanghai = require('../data/huang/yangguo/shanghai');
 var checkOne = require('../data/check_one.json');
+var testJSONJS = require('../data/test.json.js');
 var url = 'http://localhost:8000';
 
 describe('gulp-mock-serve', function(){
@@ -26,7 +27,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
   });
 
   it('mock /test?mt=1 =>  test1.json', function(done) {
@@ -39,7 +40,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
   });
 
   it('mock post /test =>  test1.json and mt=1', function(done) {
@@ -54,7 +55,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
   });
 
   it('mock get /check.do?id=123 =>  check_one.json', function(done) {
@@ -68,7 +69,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
   });
   it('mock post /test.do =>  test.do.json', function(done) {
       stream = webserver();
@@ -80,7 +81,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
 
   });
 
@@ -94,7 +95,7 @@ describe('gulp-mock-serve', function(){
             if (err) return done(err);
             done(err);
           });
-      }, 300);
+      }, 500);
   });
 
   it('mock /huang/yangguo/shanghai =>  huang/yangguo/shanghai.json', function (done) {
@@ -107,8 +108,19 @@ describe('gulp-mock-serve', function(){
               if (err) return done(err);
               done(err);
         });
-      }, 300);
+      }, 500);
   });
-
+  it('mock /test.json =>  test.json.js', function (done) {
+      stream = webserver();
+      setTimeout(function() {
+        request(url)
+            .get('/test.json')
+            .expect(200, testJSONJS)
+            .end(function (err) {
+              if (err) return done(err);
+              done(err);
+        });
+      }, 500);
+  });
 
 });
