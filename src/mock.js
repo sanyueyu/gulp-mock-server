@@ -5,7 +5,8 @@ var path = require('path');
 var rd = require('rd');
 var colors = require('colors');
 var CWD = process.cwd();
-var checkMark = /\.json|\.js/;
+var checkMark = /\.json$|\.js$/;
+//var checkMark = /\.json|\.js/;
 
 module.exports = function(mockDir) {
   return function(req, res, next){
@@ -16,13 +17,17 @@ module.exports = function(mockDir) {
     //var dir = path.join(CWD, './data/');
     var dir = path.join(CWD, mockDir);
     var fileNames = rd.readSync(dir)
-      .filter(function(x) {return checkMark.test(x);})
+      .filter(function(x) {
+        return checkMark.test(x);
+      })
       //.map(function(x) {return x.split(path.sep + 'data' + path.sep)[1];})
-      .map(function(x) {return x.split(path.sep + mockDir.replace(/^\.\//, '').replace(/\//g, path.sep) + path.sep)[1];})
+      .map(function(x) {
+        return x.split(path.sep + mockDir.replace(/^\.\//, '').replace(/\//g, path.sep) + path.sep)[1];
+      })
       .map(function(x) {
         return {
           name: '/' + x.replace(checkMark, ''),
-          verb: x.match(checkMark)[0]
+          verb: x.match(checkMark).pop()
         };
       });
     var hasFile = false;
@@ -74,7 +79,7 @@ module.exports = function(mockDir) {
         }
 
         // 如果是JS文件则根据参数请求文件
-        console.log('[gulp-mock-server]', req.url + '=>' + filePath);
+        console.log('[gulp-mock-server]', req.method + ':' + req.url + '=>' + filePath);
 
         // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
         delete require.cache[require.resolve(filePath)];

@@ -1,6 +1,6 @@
 {
   "name": "gulp-mock-server",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "to be the most simple gulp mock tool in the world",
   "main": "src/index.js",
   "bin": {
