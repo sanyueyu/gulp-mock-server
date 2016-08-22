@@ -8,7 +8,7 @@ var CWD = process.cwd();
 var checkMark = /\.json$|\.js$/;
 //var checkMark = /\.json|\.js/;
 
-module.exports = function(mockDir) {
+module.exports = function(mockDir, allowCrossOrigin) {
   return function(req, res, next){
     // mt is mocktag 作为标示,相同url参数不同请求的数据不同
     var mt = req.query.mt || req.body.mt || '';
@@ -83,7 +83,11 @@ module.exports = function(mockDir) {
 
         // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
         delete require.cache[require.resolve(filePath)];
-        res.setHeader("Access-Control-Allow-Origin", "*");
+        if (allowCrossOrigin) {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        }
         if (urlObj.query&&urlObj.query.callback) {
             res.setHeader('Content-type', 'application/javascript;charset=utf-8');
             setTimeout(function() {
