@@ -39,6 +39,7 @@ module.exports = function(options) {
     https: false,
     open: false,
     mockDir: './data',
+    allowCrossOrigin: false,
     //middleware: [bodyParser.json(), query(), mockMiddle(mockDir)],
     middleware: [bodyParser.urlencoded({ extended: false }), bodyParser.json(), query()],
     //middleware: [multipart(), query()],
@@ -149,7 +150,10 @@ module.exports = function(options) {
   }
 
   // mock middleware
-  app.use(mockMiddle(config.mockDir));
+  if (config.allowCrossOrigin) {
+    gutil.log("Cross origin resource sharing is enabled (CORS headers are sent)");
+  }
+  app.use(mockMiddle(config.mockDir, config.allowCrossOrigin));
 
   // Proxy requests
   for (var i = 0, len = config.proxies.length; i < len; i++) {

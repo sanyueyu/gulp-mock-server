@@ -13,24 +13,24 @@ _ => means  real request _
 #### change mock directory, default named 'data' directory in your project
 ```javascript
  ...
- mockDir: './demo/data'  
+ mockDir: './demo/data'
  ...
 ```
-#### generate jsonp interface automatically 
+#### generate jsonp interface automatically
 
  >'host + /test.jsonp?callback=cb'  => response file 'data/test.jsonp.json'
 
 #### support https
 ```javascript
  ...
- https: true  
+ https: true
  ...
 ```
-#### multi-level directory such as: 
+#### multi-level directory such as:
 
  >'host + /class/xiaoming'  => response file 'data/class/xiaoming.json'
 
-#### different params different response by get or post request  
+#### different params different response by get or post request
 
 /data/check.do.js content:
 
@@ -99,7 +99,7 @@ $ npm install -g gulp-mock-server
 make a directory named "data" in the root directory
 
 ### second step
-webserver config: 
+webserver config:
 
 ```js
 var gulp = require('gulp');
@@ -133,6 +133,7 @@ Key | Type | Default | Description |
 `open` | Boolean/String | `false` | open the localhost server in the browser. By providing a String you can specify the path to open (for complete path, use the complete url `http://my-server:8080/public/`) .
 `https` | Boolean/Object | `false` | whether to use https or not. By default, `gulp-webserver` provides you with a development certificate but you remain free to specify a path for your key and certificate by providing an object like this one: `{key: 'path/to/key.pem', cert: 'path/to/cert.pem'}`.
 `proxies` | Array | `[]`| a list of proxy objects.  Each proxy object can be specified by `{source: '/abc', target: 'http://localhost:8080/abc', options: {headers: {'ABC_HEADER': 'abc'}}}`.
+`allowCrossOrigin` | Boolean | `false`| whether to allow cross origin calls (CORS)
 
 ## contributors
 
