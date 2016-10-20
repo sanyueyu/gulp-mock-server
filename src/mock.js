@@ -8,7 +8,7 @@ var CWD = process.cwd();
 var checkMark = /\.json$|\.js$/;
 //var checkMark = /\.json|\.js/;
 
-module.exports = function(mockDir) {
+module.exports = function(mockDir, allowCrossOrigin) {
     return function(req, res, next){
         // mt is mocktag 作为标示,相同url参数不同请求的数据不同
         var mt = req.query.mt || req.body.mt || '';
@@ -16,6 +16,7 @@ module.exports = function(mockDir) {
         var fullName = urlObj.pathname + mt;
         //var dir = path.join(CWD, './data/');
         var dir = path.join(CWD, mockDir);
+        var code = 200;
         var fileNames = rd.readSync(dir)
             .filter(function(x) {
                 return checkMark.test(x);
@@ -41,9 +42,10 @@ module.exports = function(mockDir) {
                 verb = name.verb;
             }
         });
-        
+
+        // 拦截到请求里本地存在这个文件
         if (hasFile) {
-            var inlineData; // 写在check条件里的数据
+            var resultData, inlineData; // 写在check条件里的数据
             var delay = 0;
             var filePath = path.join(dir + fullName + verb);
 
@@ -69,7 +71,8 @@ module.exports = function(mockDir) {
                             //filePath = path.join(dir + fullName.replace(/^\.|\/.+$/, '') + item.response);
                             filePath = path.join(dir + item.response.replace(/^\./, ''));
                         } else {
-                            inlineData = item;
+                            resultData = item;
+                            inlineData = item.response;
                         }
                         return false;
                     }
@@ -77,29 +80,31 @@ module.exports = function(mockDir) {
                 });
             }
 
-            var code = inlineData.code ? inlineData.code : 200;
-            inlineData = inlineData.response;
-            var headers = {
-                "Access-Control-Allow-Origin": "*"
-            };
-
             // 如果是JS文件则根据参数请求文件
-            // console.log('[gulp-mock-server]', req.method + ':' + req.url + '=>' + filePath);
+            console.log('[gulp-mock-server]', req.method + ':' + req.url + '=>' + filePath);
+
+            if(resultData && resultData.hasOwnProperty('code')) { code = resultData.code; }
+            var headers = {};
 
             // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
             delete require.cache[require.resolve(filePath)];
-            // res.setHeader("Access-Control-Allow-Origin", "*");
+            if (allowCrossOrigin) {
+                headers["Access-Control-Allow-Origin"] = "*";
+                headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
+                headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
+
+            }
             if (urlObj.query&&urlObj.query.callback) {
-                headers['Content-type'] = 'application/javascript;charset=utf-8';
+                headers["Content-type"] = "application/javascript;charset=utf-8";
                 res.writeHead(code, headers);
-                // res.setHeader('Content-type', 'application/javascript;charset=utf-8');
+
                 setTimeout(function() {
                     res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
                 }, delay);
             } else {
-                headers['Content-Type'] = 'application/json;charset=utf-8';
+                headers["Content-type"] = "application/json;charset=utf-8";
                 res.writeHead(code, headers);
-                // res.setHeader('Content-Type', 'application/json;charset=utf-8');
+
                 setTimeout(function() {
                     res.end(JSON.stringify(inlineData || require(filePath)));
                 }, delay);
@@ -108,9 +113,6 @@ module.exports = function(mockDir) {
         } else {
             console.log('No file:'.red + path.join(dir + fullName + '[.json|.js]').red);
         }
-
-
-
 
         next();
     }
