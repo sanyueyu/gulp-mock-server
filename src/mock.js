@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var rd = require('rd');
 var colors = require('colors');
+var Request = require('request');
 var CWD = process.cwd();
 var checkMark = /\.json$|\.js$/;
 //var checkMark = /\.json|\.js/;
@@ -46,6 +47,7 @@ module.exports = function(mockDir, allowCrossOrigin) {
     if (hasFile) {
         var inlineData; // 写在check条件里的数据
         var delay = 0;
+        var route = null;
         var filePath = path.join(dir + fullName + verb);
 
         if (verb === '.js') {
@@ -63,6 +65,10 @@ module.exports = function(mockDir, allowCrossOrigin) {
               }
             }
             if (isCheck) {
+              if (item.route) {
+                route = item.route
+                return;
+              }
               if (item.delay) {
                 delay = item.delay;
               }
@@ -83,6 +89,12 @@ module.exports = function(mockDir, allowCrossOrigin) {
 
         // 删除缓存区里的某个模块 删除该模块后，下次加载该模块时重新运行该模块
         delete require.cache[require.resolve(filePath)];
+        var resData;
+        if (route) {
+          return Request(route).pipe(res);
+        } else {
+          resData = require(filePath);
+        }
         if (allowCrossOrigin) {
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -91,12 +103,12 @@ module.exports = function(mockDir, allowCrossOrigin) {
         if (urlObj.query&&urlObj.query.callback) {
             res.setHeader('Content-type', 'application/javascript;charset=utf-8');
             setTimeout(function() {
-                res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || require(filePath)) + ')');
+                res.end(urlObj.query.callback + '(' + JSON.stringify(inlineData || resData ) + ')');
             }, delay);
         } else {
             res.setHeader('Content-Type', 'application/json;charset=utf-8');
             setTimeout(function() {
-                res.end(JSON.stringify(inlineData || require(filePath)));
+                res.end(JSON.stringify(inlineData || resData));
             }, delay);
         }
         return;
