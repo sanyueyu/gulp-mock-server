@@ -8,6 +8,7 @@ var xiaoming = require('../data/class/xiaoming');
 var shanghai = require('../data/huang/yangguo/shanghai');
 var checkOne = require('../data/check_one.json');
 var testJSONJS = require('../data/test.json.js');
+var UserData = require('../data/_user.json');
 var url = 'http://localhost:8000';
 
 describe('gulp-mock-serve', function(){
@@ -121,6 +122,19 @@ describe('gulp-mock-serve', function(){
               done(err);
         });
       }, 500);
+  });
+
+  it('mock route http://jsonplaceholder.typicode.com/users =>  ./_users.json', function (done) {
+      stream = webserver();
+      setTimeout(function() {
+        request(url)
+            .get('/users')
+            .expect(200, UserData)
+            .end(function (err) {
+              if (err) return done(err);
+              done(err);
+        });
+      },1000);
   });
 
 });
